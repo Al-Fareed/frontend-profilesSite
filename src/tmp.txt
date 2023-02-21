@@ -1,0 +1,4 @@
+node modules version used:
+npm install --save react-router-dom@5 --save-exact
+module for transition effect in side drawer(vertical nav):
+npm install --save react-transition-group

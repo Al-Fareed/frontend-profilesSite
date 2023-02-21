@@ -25,9 +25,9 @@ const Input = (props) => {
    // inputState is the state and dispatch is the funtion used to update the function which will inputReducer
   // Function useReducer has 2 arguement one is the inputReducer to manage the state, the other arg is to set inital value
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: "",
+    value: props.value || '',
     isTouched:false,
-    isValid: false,
+    isValid: props.valid || false
   });
   const { id,onInput }=props;
   const { value,isValid}=inputState;

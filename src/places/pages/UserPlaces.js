@@ -33,8 +33,9 @@ const UserPlaces = () => {
   const loadedPlaces = DUMMY_PLACES.filter(place=>place.creator === userId) //filtering the places using the creator name from DUMMY_PLACES 
   return (
     // sending dummy places to Placelist for styling and displaying
+    <>
     <PlaceList items={loadedPlaces}/>
-    
+    </>
   )
 };
 // here userId is from App.js which is directly accessible to this component and it is used in url link routing

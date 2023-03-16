@@ -1,7 +1,7 @@
 import React ,{useState} from "react";
 import { Link } from "react-router-dom";
 import "./MainNavigation.css";
-import NavLinks from "./NavLinks"; // importing Navlinks to substitute here
+import NavLinks from "./NavLinks"; // importing NavLinks to substitute here
 import MainHeader from "./MainHeader";
 import SideDrawer from "./SideDrawer";
 import Backdrop from "../UIElements/Backdrop";
@@ -20,7 +20,7 @@ const MainNavigation = (props) => {
     <React.Fragment>
       {drawerIsOpen && <Backdrop onClick={closeDrawerHandler}/>} 
       {/** This element is used to just wrap the other two element, 
-       * and calls function to close drawer on event of onclick which passed from sidedrawer to this component
+       * and calls function to close drawer on event of onclick which passed from sideDrawer to this component
        * (this component sends close function to SideDrawer  */}
      
      <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}>

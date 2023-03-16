@@ -17,13 +17,13 @@ const inputReducer = (state, action) => {
           }
         }
     default:
-      return state; // if changes occur and we dont mention in switch what to do, then just return state
+      return state; // if changes occur and we don't mention in switch what to do, then just return state
   }
 };
 
 const Input = (props) => {
-   // inputState is the state and dispatch is the funtion used to update the function which will inputReducer
-  // Function useReducer has 2 arguement one is the inputReducer to manage the state, the other arg is to set inital value
+   // inputState is the state and dispatch is the function used to update the function which will inputReducer
+  // Function useReducer has 2 argument one is the inputReducer to manage the state, the other arg is to set initial value
   const [inputState, dispatch] = useReducer(inputReducer, {
     value: props.initialValue || '',
     isTouched:false,
@@ -69,7 +69,7 @@ const Input = (props) => {
         onBlur={touchHandler}
       />
     );
-  // The variable element checks the recieved props whether type is input or textarea and assigns their respective props to them
+  // The variable element checks the received props whether type is input or textarea and assigns their respective props to them
   return (
     <div
       className={`form-control ${!inputState.isValid && inputState.isTouched && "form-control--invalid"}`}
@@ -77,7 +77,7 @@ const Input = (props) => {
       <label htmlFor={props.id}>{props.label}</label>
       {element}
       {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
-      {/* This is either input or Textarea that decides on the basis of the props recieved */}
+      {/* This is either input or Textarea that decides on the basis of the props received */}
     </div>
   );
 };

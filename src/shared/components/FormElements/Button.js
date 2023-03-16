@@ -16,7 +16,7 @@ const Button = props => {
       </a>
     );
   }
-  // or  if  the button is LInk 
+  // or  if  the button is Link 
   if (props.to) {
     return (
       <Link

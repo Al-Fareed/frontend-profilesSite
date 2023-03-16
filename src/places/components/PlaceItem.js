@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
+import { AuthContext } from "../../shared/context/auth-context";
 import Card from "../../shared/components/UIElements/Card";
 import "./PlaceItem.css";
 import Map from "../../shared/components/UIElements/Map";
 import Modal from "../../shared/components/UIElements/Modal";
 import Button from "../../shared/components/FormElements/Button";
 const PlaceItem = (props) => {
+
+  const auth=useContext(AuthContext); //calling function from auth-js to check whether user has logged in 
+
   // Recieves all the place details as props and displays
 
   const [showMap, setShowMap] = useState(false);
@@ -38,7 +42,7 @@ const [showConfirmModal,setShowConfirmModal]=useState(false);
         </div>
       </Modal>
       {/* end of Model / pop-up */}
-
+{/* A modal that pop up to confirm whether the user wants to delete  */}
       <Modal
       show={showConfirmModal}
       onCancel={cancelDeleteWarningHandler}
@@ -50,12 +54,14 @@ const [showConfirmModal,setShowConfirmModal]=useState(false);
           <Button danger onClick={confirmDeleteWarningHandler}>DELETE</Button>
         </React.Fragment>
       }
-      >
+      > 
         <p>Do you want to proceed and remove this place?</p>
       </Modal>
-      <li className="place-item">
-        <Card className="place-item__content">
-          <div className="place-item__image">
+      {/*to confirm from the user whether he is sure to delete */}
+
+      <li className="place-item"> {/*To list all the places of that users*/}
+        <Card className="place-item__content"> {/*To display in card */}
+          <div className="place-item__image"> {/**For image display */}
             <img src={props.image} alt={props.title} />
           </div>
           <div className="place-item__info">
@@ -65,8 +71,8 @@ const [showConfirmModal,setShowConfirmModal]=useState(false);
           </div>
           <div className="place-item__actions">
             <Button inverse onClick={openMapHandler}>VIEW ON MAP</Button>
-            <Button to={`/places/${props.id}`}>EDIT</Button>
-            <Button danger onClick={showDeleteWarningHandler}>DELETE</Button>
+            {auth.isLoggedIn && <Button to={`/places/${props.id}`}>EDIT</Button>}
+            {auth.isLoggedIn &&<Button danger onClick={showDeleteWarningHandler}>DELETE</Button>}
           </div>
         </Card>
       </li>

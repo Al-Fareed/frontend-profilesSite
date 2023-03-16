@@ -106,8 +106,8 @@ const UpdatePlace = () => {
         label="Title"
         errorText="Please enter a valid title"
         onInput={inputHandler}
-        initalValue={formState.inputs.title.value}
-        initalIsValid={formState.inputs.title.isValid}
+        initialValue={formState.inputs.title.value}
+        initialIsValid={formState.inputs.title.isValid}
       />
       <Input
         id="description"
@@ -116,8 +116,8 @@ const UpdatePlace = () => {
         label="Description"
         errorText="Please enter a valid description"
         onInput={inputHandler}
-        initalValue={formState.inputs.description.value}
-        initalIsValid={formState.inputs.description.isValid}
+        initialValue={formState.inputs.description.value}
+        initialIsValid={formState.inputs.description.isValid}
       />
       <Button type="submit" disabled={!formState.isValid}>
         UPDATE

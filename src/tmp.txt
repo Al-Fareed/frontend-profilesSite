@@ -2,3 +2,8 @@ node modules version used:
 npm install --save react-router-dom@5 --save-exact
 module for transition effect in side drawer(vertical nav):
 npm install --save react-transition-group
+@package.json
+"scripts": {
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
+}

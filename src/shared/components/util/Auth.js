@@ -34,7 +34,7 @@ const authSubmitHandler=(event)=>{
   auth.login();
 }
 
-const sigunModeHandler = ()=>{
+const signInModeHandler = ()=>{
   if(!isLoginMode){
     setFormData({
       ...formState.inputs,
@@ -90,7 +90,7 @@ const sigunModeHandler = ()=>{
         {isLoginMode ? "LOGIN" : "SIGN UP"}
         </Button>
       </form>
-      <Button inverse onClick={sigunModeHandler}>{isLoginMode ? "SIGN UP" : "LOGIN"}</Button>
+      <Button inverse onClick={signInModeHandler}>{isLoginMode ? "SIGN UP" : "LOGIN"}</Button>
     </Card>
   );
 };

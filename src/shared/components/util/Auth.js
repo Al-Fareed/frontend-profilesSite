@@ -1,3 +1,4 @@
+import ImageUpload from "../FormElements/ImageUpload";
 import React, { useState, useContext } from "react";
 import Card from "../UIElements/Card";
 import "./Auth.css";
@@ -114,6 +115,7 @@ const Auth = () => {
               onInput={inputHandler}
             />
           )}
+          {!isLoginMode && <ImageUpload center id = "image" />}
           <Input
             element="input"
             id="email"
@@ -132,6 +134,7 @@ const Auth = () => {
             errorText="Please enter a valid password"
             onInput={inputHandler}
           />
+
           <Button type="submit" disabled={!formState.isValid}>
             {isLoginMode ? "LOGIN" : "SIGN UP"}
           </Button>

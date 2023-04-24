@@ -1,14 +1,39 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Button from "./Button";
 import "./ImageUpload.css";
+
 const ImageUpload = (props) => {
+  const [file, setFile] = useState();
+  const [previewUrl, setPreviewUrl] = useState();
+  const [isValid, setIsValid] = useState(false);
   const filePickerRef = useRef();
+
+  useEffect(()=>{
+    if(!file){
+        return ;
+    }
+    const fileReader = new FileReader(); //read files 
+    fileReader.onload = () =>{
+        setPreviewUrl(fileReader.result);
+    };
+    fileReader.readAsDataURL(file);
+  },[file]);
 
   const pickImageHandler = () => {
     filePickerRef.current.click();
   };
   const pickedHandler = (event) => {
-    console.log(event.target);
+    let pickedFile;
+    let fileIsValid = isValid;
+    if (event.target.files || event.target.files.length === 1) {
+       pickedFile = event.target.files[0];
+      setFile(pickedFile);
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+      fileIsValid = true;
+    }
+    props.onInput(props.id,pickedFile,fileIsValid)
   };
   return (
     <div className="form-control">
@@ -22,12 +47,14 @@ const ImageUpload = (props) => {
       />
       <div className={`image-upload ${props.center && "center"}`}>
         <div className="image-upload__preview">
-          <img src="" alt="Preview" />
+          {previewUrl && <img src={previewUrl} alt="Preview" />}
+          {!previewUrl && <p>Please upload an Image</p>}
         </div>
         <Button type="button" onClick={pickImageHandler}>
           BROWSE IMAGE
         </Button>
       </div>
+      {!isValid && <p>{props.errorText}</p>}
     </div>
   );
 };

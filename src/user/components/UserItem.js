@@ -12,7 +12,7 @@ const UserItem = (props) => {
           {/* This (Link Tag) is the alternative of anchor tag which here this tag will restrict to reload the page */}
           <Link to={`/${props.id}/places`}>
             <div className="user-item__image">
-              <Avatar image={props.image} alt={props.name} />{" "}
+              <Avatar image={`http://localhost:5000/${props.image}`} alt={props.name} />{" "}
               {/** To display images with round corner */}
             </div>
             <div className="user-item__info">

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -18,18 +18,29 @@ const App = () => {
   const [token, setToken] = useState(false);
   const [userId, setUserId] = useState(false);
 
-  const login = useCallback((uid,token) => {
+  const login = useCallback((uid, token) => {
     setToken(token);
     setUserId(uid);
     localStorage.setItem(
-      'userData',
-      JSON.stringify({userId:uid, token :token})
+      "userData",
+      JSON.stringify({ userId: uid, token: token })
     );
+    // stores the token in localStorage which helps to auto login
   }, []);
   const logout = useCallback((uid) => {
     setToken(null);
-    setUserId(uid)
+    setUserId(uid);
+    localStorage.removeItem('userData');
   }, []);
+
+  // To fetch whether a user is logged in so that his ID and token are stored in local storage
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    if (storedData && storedData.token) {
+      login(storedData.userId, storedData.token);
+    }
+  }, [login]);
+
 
   let routes;
   if (token) {
@@ -71,7 +82,7 @@ const App = () => {
     <AuthContext.Provider
       value={{
         isLoggedIn: !!token,
-        token:token,
+        token: token,
         userId: userId,
         login: login,
         logout: logout,

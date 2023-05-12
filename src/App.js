@@ -18,29 +18,35 @@ const App = () => {
   const [token, setToken] = useState(false);
   const [userId, setUserId] = useState(false);
 
-  const login = useCallback((uid, token) => {
+  const login = useCallback((uid, token,expirationDate) => {
     setToken(token);
     setUserId(uid);
+    // checking whether expiration date exists or creating new expiration date
+    const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
     localStorage.setItem(
       "userData",
-      JSON.stringify({ userId: uid, token: token })
+      JSON.stringify({
+        userId: uid,
+        token: token,
+        expiration: tokenExpirationDate.toISOString(),
+      })
     );
     // stores the token in localStorage which helps to auto login
   }, []);
   const logout = useCallback((uid) => {
     setToken(null);
     setUserId(uid);
-    localStorage.removeItem('userData');
+    localStorage.removeItem("userData");
   }, []);
 
   // To fetch whether a user is logged in so that his ID and token are stored in local storage
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("userData"));
-    if (storedData && storedData.token) {
-      login(storedData.userId, storedData.token);
+    // checking stored date is greater than current date time through new Date method
+    if (storedData && storedData.token && new Date(storedData.expiration)>new Date()) {
+      login(storedData.userId, storedData.token, new Date(storedData.expiration));
     }
   }, [login]);
-
 
   let routes;
   if (token) {

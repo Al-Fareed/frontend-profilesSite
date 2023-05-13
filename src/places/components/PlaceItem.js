@@ -56,7 +56,7 @@ const PlaceItem = (props) => {
         {/* Button is sent as props to modal to close the popping up map */}
         <div className="map-container">
           <Map center={props.coordinates} zoom={16} />{" "}
-          {/* Map component recieving the coordinate to display pin at the middle of the pop-up */}
+          {/* Map component receiving the coordinate to display pin at the middle of the pop-up */}
         </div>
       </Modal>
       {/* end of Model / pop-up */}

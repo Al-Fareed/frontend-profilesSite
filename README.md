@@ -1,2 +1,2 @@
 # profiles-site
- Stores details of each user
+ Front-End for profile-site application
